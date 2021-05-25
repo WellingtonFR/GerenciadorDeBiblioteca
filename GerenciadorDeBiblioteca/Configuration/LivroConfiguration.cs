@@ -11,11 +11,6 @@ namespace GerenciadorDeBiblioteca.Configuration
 
             builder.ToTable("Livros");
 
-            builder.HasMany(p => p.PalavrasChave)
-                .WithOne(p => p.Livro)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
-
             builder.HasKey(p => p.LivroID);
 
             builder.Property(p => p.Titulo)
@@ -41,6 +36,11 @@ namespace GerenciadorDeBiblioteca.Configuration
             builder.Property(p => p.Classificacao)
                 .HasColumnType("nvarchar")
                 .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(p => p.PalavrasChave)
+                .HasColumnType("nvarchar")
+                .HasMaxLength(100)
                 .IsRequired();
         }
     }

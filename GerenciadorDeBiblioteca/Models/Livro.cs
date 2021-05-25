@@ -19,7 +19,7 @@ namespace GerenciadorDeBiblioteca.Models
 
         public string Classificacao { get; set; }
 
-        public ICollection<PalavraChave> PalavrasChave { get; set; }
+        public string PalavrasChave { get; set; }
 
 
     }

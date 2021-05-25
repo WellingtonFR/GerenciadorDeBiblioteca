@@ -1,12 +1,10 @@
-﻿using System;
+﻿using GerenciadorDeBiblioteca.Context;
+using GerenciadorDeBiblioteca.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GerenciadorDeBiblioteca.Context;
-using GerenciadorDeBiblioteca.Models;
 
 namespace GerenciadorDeBiblioteca.Controllers
 {
@@ -25,7 +23,7 @@ namespace GerenciadorDeBiblioteca.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Livro>>> GetLivros()
         {
-            return await _context.Livros.Include(c => c.PalavrasChave).ToListAsync();
+            return await _context.Livros.ToListAsync();
         }
 
         // GET: api/Livros/5
@@ -43,7 +41,6 @@ namespace GerenciadorDeBiblioteca.Controllers
         }
 
         // PUT: api/Livros/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLivro(int id, Livro livro)
         {
@@ -74,7 +71,6 @@ namespace GerenciadorDeBiblioteca.Controllers
         }
 
         // POST: api/Livros
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Livro>> PostLivro(Livro livro)
         {
