@@ -44,7 +44,7 @@ namespace GerenciadorDeBiblioteca.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLivro(int id, Livro livro)
         {
-            if (id != livro.LivroID)
+            if (id != livro.LivroId)
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             _context.Livros.Add(livro);
             await _context.SaveChangesAsync();
 
-            return  CreatedAtAction("GetLivro", new { id = livro.LivroID }, livro);
+            return  CreatedAtAction("GetLivro", new { id = livro.LivroId }, livro);
         }
 
         // DELETE: api/Livros/5
@@ -98,7 +98,7 @@ namespace GerenciadorDeBiblioteca.Controllers
 
         private bool LivroExists(int id)
         {
-            return _context.Livros.Any(e => e.LivroID == id);
+            return _context.Livros.Any(e => e.LivroId == id);
         }
     }
 }

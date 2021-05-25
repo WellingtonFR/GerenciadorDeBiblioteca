@@ -7,7 +7,7 @@ namespace GerenciadorDeBiblioteca.Models
     public class Livro
     {
 
-        public int LivroID { get; set; }
+        public int LivroId { get; set; }
 
         public string Titulo { get; set; }
 

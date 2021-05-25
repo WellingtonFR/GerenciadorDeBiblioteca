@@ -11,7 +11,7 @@ namespace GerenciadorDeBiblioteca.Configuration
 
             builder.ToTable("Livros");
 
-            builder.HasKey(p => p.LivroID);
+            builder.HasKey(p => p.LivroId);
 
             builder.Property(p => p.Titulo)
                 .HasColumnType("nvarchar")
