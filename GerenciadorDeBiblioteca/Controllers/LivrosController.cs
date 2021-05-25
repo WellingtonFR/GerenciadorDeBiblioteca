@@ -25,7 +25,7 @@ namespace GerenciadorDeBiblioteca.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Livro>>> GetLivros()
         {
-            return await _context.Livros.Include(c => c.PalavrasChave).ToListAsync();
+            return await _context.Livros.ToListAsync();
         }
 
         // GET: api/Livros/5
@@ -81,7 +81,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             _context.Livros.Add(livro);
             await _context.SaveChangesAsync();
 
-            return  CreatedAtAction("GetLivro", new { id = livro.LivroID }, livro);
+            return CreatedAtAction("GetLivro", new { id = livro.LivroID }, livro);
         }
 
         // DELETE: api/Livros/5

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciadorDeBiblioteca.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210524200140_Inicial")]
+    [Migration("20210525155803_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,11 @@ namespace GerenciadorDeBiblioteca.Migrations
                         .HasMaxLength(17)
                         .HasColumnType("nvarchar(17)");
 
+                    b.Property<string>("PalavrasChave")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -55,42 +60,6 @@ namespace GerenciadorDeBiblioteca.Migrations
                     b.HasKey("LivroID");
 
                     b.ToTable("Livros");
-                });
-
-            modelBuilder.Entity("GerenciadorDeBiblioteca.Models.PalavraChave", b =>
-                {
-                    b.Property<int>("PalavraChaveID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LivroID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Palavra_Chave")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PalavraChaveID");
-
-                    b.HasIndex("LivroID");
-
-                    b.ToTable("PalavrasChave");
-                });
-
-            modelBuilder.Entity("GerenciadorDeBiblioteca.Models.PalavraChave", b =>
-                {
-                    b.HasOne("GerenciadorDeBiblioteca.Models.Livro", "Livro")
-                        .WithMany("PalavrasChave")
-                        .HasForeignKey("LivroID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Livro");
-                });
-
-            modelBuilder.Entity("GerenciadorDeBiblioteca.Models.Livro", b =>
-                {
-                    b.Navigation("PalavrasChave");
                 });
 #pragma warning restore 612, 618
         }
