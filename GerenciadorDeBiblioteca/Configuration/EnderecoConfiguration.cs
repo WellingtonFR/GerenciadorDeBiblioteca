@@ -23,9 +23,12 @@ namespace GerenciadorDeBiblioteca.Configuration
                 .HasColumnType("int")
                 .IsRequired();
 
-            builder
-                .HasMany(p => p.Livros);
+            builder.Property(p => p.Categoria)
+                .HasColumnType("nvarchar")
+                .HasMaxLength(50)
+                .IsRequired();
+
         }
-        
+
     }
 }

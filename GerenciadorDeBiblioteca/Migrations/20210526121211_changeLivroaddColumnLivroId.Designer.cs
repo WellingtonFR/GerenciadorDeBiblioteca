@@ -3,14 +3,16 @@ using GerenciadorDeBiblioteca.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GerenciadorDeBiblioteca.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210526121211_changeLivroaddColumnLivroId")]
+    partial class changeLivroaddColumnLivroId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,6 @@ namespace GerenciadorDeBiblioteca.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Coluna")
                         .IsRequired()
@@ -71,11 +68,6 @@ namespace GerenciadorDeBiblioteca.Migrations
                     b.Property<int>("EnderecoId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("EstaAlugado")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasMaxLength(17)
@@ -100,13 +92,11 @@ namespace GerenciadorDeBiblioteca.Migrations
 
             modelBuilder.Entity("GerenciadorDeBiblioteca.Models.Livro", b =>
                 {
-                    b.HasOne("GerenciadorDeBiblioteca.Models.Endereco", "Endereco")
+                    b.HasOne("GerenciadorDeBiblioteca.Models.Endereco", null)
                         .WithMany("Livros")
                         .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("GerenciadorDeBiblioteca.Models.Endereco", b =>

@@ -34,20 +34,19 @@ namespace GerenciadorDeBiblioteca.Controllers
 
             if (endereco == null)
             {
-                return NotFound();
+                return NotFound("Nenhum endereço foi encontrado com os dados informados");
             }
 
             return endereco;
         }
 
         // PUT: api/Enderecos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEndereco(int id, Endereco endereco)
         {
             if (id != endereco.EnderecoId)
             {
-                return BadRequest();
+                return BadRequest("Não foi possível atualizar os endereços, requisão com formato inválido");
             }
 
             _context.Entry(endereco).State = EntityState.Modified;
@@ -60,11 +59,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             {
                 if (!EnderecoExists(id))
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    return NotFound("Houve um erro ao atualizar o endereço, nenhum endereço foi encontrado com os dados informados");
                 }
             }
 
@@ -72,7 +67,6 @@ namespace GerenciadorDeBiblioteca.Controllers
         }
 
         // POST: api/Enderecos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Endereco>> PostEndereco(Endereco endereco)
         {
@@ -89,7 +83,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             var endereco = await _context.Enderecos.FindAsync(id);
             if (endereco == null)
             {
-                return NotFound();
+                return NotFound("Não foi possível excluir o endereço, nenhum endereço foi encontrado com os dados informados");
             }
 
             _context.Enderecos.Remove(endereco);

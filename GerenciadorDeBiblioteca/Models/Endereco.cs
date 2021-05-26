@@ -16,6 +16,8 @@ namespace GerenciadorDeBiblioteca.Models
 
         public int Prateleira { get; set; }
 
+        public string Categoria { get; set; }
+
         public virtual ICollection<Livro> Livros { get; set; }
 
     }

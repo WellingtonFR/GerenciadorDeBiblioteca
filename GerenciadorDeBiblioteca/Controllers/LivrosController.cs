@@ -23,18 +23,18 @@ namespace GerenciadorDeBiblioteca.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Livro>>> GetLivros()
         {
-            return await _context.Livros.ToListAsync();
+            return await _context.Livros.Include(p=>p.Endereco).ToListAsync();
         }
 
         // GET: api/Livros/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Livro>> GetLivro(int id)
         {
-            var livro = await _context.Livros.FindAsync(id);
+            var livro = await _context.Livros.Include(p => p.Endereco).FirstOrDefaultAsync(p=>p.LivroId == id);
 
             if (livro == null)
             {
-                return NotFound();
+                return NotFound("Nenhum livro foi encontrado com os dados informados");
             }
 
             return livro;
@@ -46,7 +46,7 @@ namespace GerenciadorDeBiblioteca.Controllers
         {
             if (id != livro.LivroId)
             {
-                return BadRequest();
+                return BadRequest("Erro ao localizar o livro, requisicão com formato inválido");
             }
 
             _context.Entry(livro).State = EntityState.Modified;
@@ -59,11 +59,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             {
                 if (!LivroExists(id))
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    return NotFound("Não foi possível atualizar os dados do livro, Nenhum livro foi encontrado com os dados informados");
                 }
             }
 
@@ -87,7 +83,7 @@ namespace GerenciadorDeBiblioteca.Controllers
             var livro = await _context.Livros.FindAsync(id);
             if (livro == null)
             {
-                return NotFound();
+                return NotFound("Nenhum livro foi encontrado com os dados informados");
             }
 
             _context.Livros.Remove(livro);

@@ -42,6 +42,11 @@ namespace GerenciadorDeBiblioteca.Configuration
                 .HasColumnType("nvarchar")
                 .HasMaxLength(100)
                 .IsRequired();
+
+            builder.Property(p => p.EstaAlugado)
+                .HasColumnType("bit")
+                .HasDefaultValue(false)
+                .IsRequired();
         }
     }
 }

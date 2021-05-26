@@ -21,6 +21,12 @@ namespace GerenciadorDeBiblioteca.Models
 
         public string PalavrasChave { get; set; }
 
+        public bool EstaAlugado { get; set; }
+
+        public virtual int EnderecoId {get; set; }
+
+        public virtual Endereco Endereco { get; set; }
+
 
     }
 }
